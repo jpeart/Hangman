@@ -3,7 +3,9 @@ var startpic = "assets/images/start.png";
 var nickCage = "assets/images/end.png";
 var png = ".png";
 
-var guesses = 10;
+
+var guesses = 11;
+var guesscounter = 11;
 var pic = 0;
 var piccounter = 0;
 
@@ -30,8 +32,8 @@ showme = showme.toString();
 document.getElementById("answer").innerHTML = showme;
 showme = showme.split('');
 
-
-
+//initialize count
+document.getElementById("count").innerHTML = guesscounter;
 
 document.onkeyup = function(event) {
         // Determine which key was pressed
@@ -74,45 +76,40 @@ document.onkeyup = function(event) {
                         copy = copyarray(showme);
 
                         // remove spaces from array to check if showme == answer
-                        for(var i=1; i < copy.length; i++)
-                        {
-                        	copy.splice(i,1);	
-                        	// would have been easier to find the spaces with indexof(' ') because when you remove an item the index is changed
-          					// array[0] = a array[1] = ' ' when spliced array[0] = a array[1] = y 
+                        for (var i = 1; i < copy.length; i++) {
+                            copy.splice(i, 1);
+                            // would have been easier to find the spaces with indexof(' ') because when you remove an item the index is changed
+                            // array[0] = a array[1] = ' ' when spliced array[0] = a array[1] = y 
                         }
                         // done
-                       // console.log(copy);
-                       // console.log(answer);
+                        // console.log(copy);
+                        // console.log(answer);
 
-                        if(copy.join('') == answer)
-                        {
-                        	alert("You Win!");
-     						if(confirm("Play Again?"))
-     						{
-     							reset();
-     						}
-     						else
-     						{
-     							window.close();
-     						}
+                        if (copy.join('') == answer) {
+                            alert("You Win!");
+                            if (confirm("Play Again?")) {
+                                reset();
+                            } else {
+                                window.close();
+                            }
                         }
                     }
                     // wrong guess
                     else {
                         piccounter++;
+                        guesscounter--;
                         // last guess
                         if (piccounter > guesses) {
                             document.getElementById("pic").src = nickCage;
                             alert("You Lose!");
-     						if(confirm("Play Again?"))
-     						{
-     							reset();
-     						}
-     						else
-     						{
-     							window.close();
-     						}
+                            if (confirm("Play Again?")) {
+                                reset();
+                            } else {
+                                window.close();
+                            }
                         } else {
+                            //change guess count
+                            document.getElementById("count").innerHTML = guesscounter;
                             //add guess to used array
                             used.push(userGuess);
                             //print guess to screen
@@ -150,6 +147,7 @@ function reset() {
     piccounter = 0;
     used = [];
     showme = [];
+    guesscounter = 0;
     for (var i = 0; i < checkme.length; i++) {
         showme += "_ ";
     }
@@ -162,13 +160,12 @@ function reset() {
 }
 
 //make a deep copy of array 'x' and return it
-function copyarray(x){
-var newcopy = [];
-var index = null;
-for(var i=0; i<x.length; i++)
-{
-	index = x[i];
-	newcopy[i] = index;
-}
-return newcopy;
-}//end copyarray
+function copyarray(x) {
+    var newcopy = [];
+    var index = null;
+    for (var i = 0; i < x.length; i++) {
+        index = x[i];
+        newcopy[i] = index;
+    }
+    return newcopy;
+} //end copyarray
