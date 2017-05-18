@@ -12,13 +12,19 @@
 </head>
 
 <body>
-    <div class="container">
-    	<div>
-    		<h2 id=guesses> Incorrect Guesses: </h2>
-    	</div>
-        <div> 
-            <h2 style="float: left; margin: 0;"> Guesses Left: </h2>
-            <h2 id="count" style="float: left; margin: 0;"></h2>
+    <div style="margin-top: 5%;" id="p1" class="container">
+        <form>
+            Player 1, Enter a word:
+            <input type="text" id="word">
+            <input type="button" onClick="begin()" value="Let the Games Begin">
+        </form>
+    </div>
+
+    <div style="display: none;" id="p2" class="container">
+        <div class="row">
+            <div class="col-md-8"><h2 id=guesses> Incorrect Guesses: </h2></div>
+            <div class="col-md-3"><h2> Guesses Left: </h2></div>
+            <div class="col-md-1"><h2 id="count"></h2></div>
         </div>
         <br/>
         <div>
@@ -28,7 +34,6 @@
             <img class="center-block" id="pic" src="assets/images/start.png">
         </div>
     </div>
-
 </body>
 <script type="text/javascript" src="assets/js/game.js"></script>
 
